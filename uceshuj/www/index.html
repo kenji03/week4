@@ -44,7 +44,10 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.cyan-light_blue.min.css">
+	
     <link rel="stylesheet" href="styles.css">
+	
+	
     <style>
     #view-source {
       position: fixed;
@@ -121,11 +124,37 @@ crossorigin=""></script>
         </header>
         <nav class="demo-navigation mdl-navigation mdl-color--white">
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--black material-icons" role="presentation">home</i>Home</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--black material-icons" role="presentation">inbox</i>Inbox</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--black material-icons" role="presentation">flag</i>Updates</a>
-		  <a class="mdl-navigation__link" href="" onclick='getEarthquakes();return false;'><i class="mdl-color-text--black material-icons" role="presentation">report</i>Get Earthquakes</a>
-          <a class="mdl-navigation__link" href=""><i class="mdl-color-text--black material-icons" role="presentation">people</i>Social</a>
-          <div class="mdl-layout-spacer"></div>
+          <div class="dropdown">
+		  <a class="mdl-navigation__link""dropbtn" href=""><i class="mdl-color-text--black material-icons" role="presentation">inbox</i>Draw Features</a>
+				<div class="dropdown-content">
+					<a href="" onclick=' addPoint();return false;'>Point</a>
+					<a href="" onclick='addPolygon();return false;'>Circle</a>
+					<a href="" onclick='addPolygon();return false;'>Polygon</a>
+				</div>
+			</div>
+		  <div class="dropdown">
+          <a class="mdl-navigation__link""dropbtn" href=""><i class="mdl-color-text--black material-icons" role="presentation">flag</i>Distance</a>
+			<div class="dropdown-content">
+				<a href="#showDistance" onclick='getDistance()'>To Warrent St</a>
+			</div>
+			</div>	
+		<div class="dropdown">
+		  <a class="mdl-navigation__link" href=""><i class="mdl-color-text--black material-icons" role="presentation">report</i>Earthquake</a>
+			<div class="dropdown-content">
+				<a href="" id="loadEarthquakeData" onclick='loadEarthquakeData();return false;'>Load</a>
+				<a href="" id="removeEarthquakeData" onclick='removeEarthquakeData();return false;'>Unload</a>
+			</div>
+			</div>	
+		<div class="dropdown">
+		  <a class="mdl-navigation__link" href=""><i class="mdl-color-text--black material-icons" role="presentation">directions_bus</i>Busstop</a>
+			<div class="dropdown-content">
+				<a href="#" id="loadBusstopData" onclick='loadBusstopData()'>Load</a>
+				<a href="#" id="removeBusstopData" onclick='removeBusstopData()'>Unload</a>
+			</div>
+		</div>
+          <a class="mdl-navigation__link" href="" onclick=' addPolygon();return false;'><i class="mdl-color-text--black material-icons" role="presentation">people</i>Draw Polygon</a>
+		  <a class="mdl-navigation__link" href="" ><i class="mdl-color-text--black material-icons" role="presentation">people</i>Get Distance</a>
+		  <div class="mdl-layout-spacer"></div>
           <a class="mdl-navigation__link" href=""><i class="mdl-color-text--blue-900 material-icons" role="presentation">help_outline</i><span class="visuallyhidden">Help</span></a>
         </nav>
       </div>
@@ -147,22 +176,25 @@ crossorigin=""></script>
 		  
           <div class="demo-cards mdl-cell mdl-cell--4-col mdl-cell--8-col-tablet mdl-grid mdl-grid--no-spacing">
             <div class="demo-updates mdl-card mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--4-col-tablet mdl-cell--12-col-desktop">
-              <div class="mdl-card__title mdl-card--expand mdl-color--grey-800">
-                <h2 class="mdl-card__title-text">Updates</h2>
+              <div class="mdl-card__title mdl-card--expand mdl-color--black">
+                <h2 class="mdl-card__title-text">You are at</h2>
               </div>
-              <div class="mdl-card__supporting-text mdl-color-text--grey-800">
-              
+              <div class="mdl-card__supporting-text mdl-color-text--black" id='showDistance'>
+                Distance will be displayed here
+			  </div>  
+			  <div class="mdl-card__supporting-text mdl-color-text--black" id='geolocation'>
+                
 			  </div>
-              
             </div>
+			
             <div class="demo-separator mdl-cell--1-col"></div>
             
 			<div class="demo-options mdl-card mdl-color--deep-white mdl-shadow--2dp mdl-cell mdl-cell--4-col mdl-cell--3-col-tablet mdl-cell--12-col-desktop">
               <div class="mdl-card__supporting-text mdl-color-text--black">
                 <h3>View options</h3>         
               </div>
-              <div class="mdl-card__actions mdl-card--border mdl-color--grey-800">
-                <a href="#" onclick='trackLocation();return false;' class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white">current location</a>
+              <div class="mdl-card__actions mdl-card--border mdl-color--black">
+                <a href="#" onclick='trackLocation();return false;' class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-color-text--white" id="showLocation">current location</a>
                 <div class="mdl-layout-spacer"></div>
                 <i class="mdl-color-text--red material-icons" >location_on</i>	
 			  </div>
